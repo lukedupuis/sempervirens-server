@@ -1,0 +1,27 @@
+{
+  "name": "@sempervirens/server",
+  "version": "0.0.1",
+  "description": "An Express server system for serving one or more website from one server",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukedupuis/sempervirens-server.git"
+  },
+  "keywords": [
+    "Express",
+    "server",
+    "multi-site"
+  ],
+  "author": "Luke Dupuis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukedupuis/sempervirens-server/issues"
+  },
+  "homepage": "https://github.com/lukedupuis/sempervirens-server#readme"
+}
