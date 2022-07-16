@@ -6,6 +6,9 @@ import { execSync } from 'child_process';
 
 import Server from '../index.js';
 
+console.log(process.argv);
+process.exit();
+
 describe('1. Server', () => {
 
   describe('1.1. When required properties are not passed to constructor', () => {
