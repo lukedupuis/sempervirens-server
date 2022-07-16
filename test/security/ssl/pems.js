@@ -3,7 +3,6 @@ import { execSync } from 'child_process';
 const action = process.argv[2];
 const showOutput = process.argv.includes('--showOutput');
 const isCiTest = process.argv.includes('--isCiTest');
-console.log('isCiTest:', isCiTest);
 const options = { stdio: 'pipe' };
 
 if (showOutput) {
