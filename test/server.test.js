@@ -6,8 +6,6 @@ import { execSync } from 'child_process';
 
 import Server from '../index.js';
 
-const isCiTest = process.argv.includes('--isCiTest') ? ' --isCiTest' : '';
-
 describe('1. Server', () => {
 
   describe('1.1. When required properties are not passed to constructor', () => {
@@ -159,6 +157,7 @@ describe('1. Server', () => {
     const server = new Server({
       port: 8083,
       enableRedirectToHttps: true,
+      httpRedirectServerPort: 8085,
       sites: [{ domain: 'site-1' }],
       sslPaths: {
         key: join(process.cwd(), 'security/ssl/server-key.pem'),
@@ -180,7 +179,7 @@ describe('1. Server', () => {
     describe('1.5.1.1. When "enableRedirectToHttps" is true', () => {
       it('1.5.1.1.1. Should redirect to https', async () => {
         const { status, text, redirects } = await superagent
-          .get('http://site-1')
+          .get('http://site-1:8085')
           .ca(readFileSync(join(process.cwd(), 'security/ssl/ca-crt.pem')));
         expect(status).to.equal(200);
         expect(text).to.include('<title>Site 1</title>');
@@ -188,7 +187,10 @@ describe('1. Server', () => {
       });
     });
 
-    after(() => execSync(`node pems delete${isCiTest}`, { cwd: './security/ssl' }));
+    after(() => {
+      const isCiTest = process.argv.includes('--isCiTest') ? ' --isCiTest' : '';
+      execSync(`node pems delete${isCiTest}`, { cwd: './security/ssl' });
+    });
 
   });
 
@@ -196,18 +198,18 @@ describe('1. Server', () => {
     // return;
 
     const server = new Server({
-      port: 8085,
+      port: 8086,
       sites: [{ domain: 'site-1' }]
     });
     server.start({ suppressLog: true });
 
     it('1.6.1. Should stop the server', async () => {
-      const { status, text } = await superagent.get('http://site-1:8085');
+      const { status, text } = await superagent.get('http://site-1:8086');
       expect(status).to.equal(200);
       expect(text).to.include('<title>Site 1</title>');
       await server.stop();
       try {
-        await superagent.get('http://site-1:8085');
+        await superagent.get('http://site-1:8086');
       } catch({ code }) {
         expect(code).to.equal('ECONNREFUSED');
       }
@@ -219,13 +221,13 @@ describe('1. Server', () => {
     // return;
 
     const server = new Server({
-      port: 8086,
+      port: 8087,
       sites: [{ domain: 'site-1' }]
     });
     server.start({ suppressLog: true });
 
     it('1.7.1. Should load the site on "http(s)://localhost"', async () => {
-      const { status, text } = await superagent.get('http://localhost:8086');
+      const { status, text } = await superagent.get('http://localhost:8087');
       expect(status).to.equal(200);
       expect(text).to.include('<title>Site 1</title>');
     });

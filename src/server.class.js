@@ -15,6 +15,7 @@ class Server {
   #corsOptions;
   #enableRedirectToWww;
   #enableRedirectToHttps;
+  #httpRedirectServerPort;
   #sitesDir;
   #sites;
   #middleware;
@@ -34,6 +35,7 @@ class Server {
     corsOptions = {},
     enableRedirectToWww = false,
     enableRedirectToHttps = false,
+    httpRedirectServerPort = 80,
     sitesDir = 'sites',
     sites = [],
     middleware = []
@@ -45,6 +47,7 @@ class Server {
     this.#corsOptions = corsOptions;
     this.#enableRedirectToWww = enableRedirectToWww;
     this.#enableRedirectToHttps = this.#hasSsl && enableRedirectToHttps;
+    this.#httpRedirectServerPort = httpRedirectServerPort;
     this.#sitesDir = sitesDir;
     this.#sites = sites;
     this.#middleware = middleware;
@@ -218,7 +221,7 @@ class Server {
       this.#server.listen(this.#port, () => logMessage('https', this.#port));
       initSockets(this.#server);
       if (this.#enableRedirectToHttps) {
-        this.#httpRedirectServer.listen(80);
+        this.#httpRedirectServer.listen(this.#httpRedirectServerPort);
         initSockets(this.#httpRedirectServer);
       }
     } else {
