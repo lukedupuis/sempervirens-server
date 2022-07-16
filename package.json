@@ -8,8 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "cd test && mocha *.test.js",
-    "test:ci": "cd test && sudo mocha *.test.js"
+    "test": "cd test && mocha *.test.js"
   },
   "repository": {
     "type": "git",
