@@ -6,6 +6,8 @@ import { execSync } from 'child_process';
 
 import Server from '../index.js';
 
+const isCiTest = process.argv.includes('--isCiTest') ? ' --isCiTest' : '';
+
 describe('1. Server', () => {
 
   describe('1.1. When required properties are not passed to constructor', () => {
@@ -186,7 +188,7 @@ describe('1. Server', () => {
       });
     });
 
-    after(() => execSync('node pems delete', { cwd: './security/ssl' }));
+    after(() => execSync(`node pems delete${isCiTest}`, { cwd: './security/ssl' }));
 
   });
 
