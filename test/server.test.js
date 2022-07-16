@@ -194,18 +194,18 @@ describe('1. Server', () => {
     // return;
 
     const server = new Server({
-      port: 8084,
+      port: 8085,
       sites: [{ domain: 'site-1' }]
     });
     server.start({ suppressLog: true });
 
     it('1.6.1. Should stop the server', async () => {
-      const { status, text } = await superagent.get('http://site-1:8084');
+      const { status, text } = await superagent.get('http://site-1:8085');
       expect(status).to.equal(200);
       expect(text).to.include('<title>Site 1</title>');
       await server.stop();
       try {
-        await superagent.get('http://site-1:8084');
+        await superagent.get('http://site-1:8085');
       } catch({ code }) {
         expect(code).to.equal('ECONNREFUSED');
       }
@@ -217,13 +217,13 @@ describe('1. Server', () => {
     // return;
 
     const server = new Server({
-      port: 8085,
+      port: 8086,
       sites: [{ domain: 'site-1' }]
     });
     server.start({ suppressLog: true });
 
     it('1.7.1. Should load the site on "http(s)://localhost"', async () => {
-      const { status, text } = await superagent.get('http://localhost:8085');
+      const { status, text } = await superagent.get('http://localhost:8086');
       expect(status).to.equal(200);
       expect(text).to.include('<title>Site 1</title>');
     });
