@@ -1,0 +1,15 @@
+[ req ]
+default_bits           = 4096
+days                   = 9999
+distinguished_name     = req_distinguished_name
+prompt                 = no
+output_password        = password
+
+[ req_distinguished_name ]
+C                      = US
+ST                     = MA
+L                      = Boston
+O                      = Sempervirens
+OU                     = Development
+CN                     = sempervirens-ca
+emailAddress           = admin@sempervirens.dev

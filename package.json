@@ -1,27 +1,42 @@
 {
   "name": "@sempervirens/server",
   "version": "0.0.1",
-  "description": "An Express server system for serving one or more website from one server",
+  "description": "An Express server system for serving one or more website(s) from one server",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "cd test && mocha *.test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukedupuis/sempervirens-server.git"
   },
   "keywords": [
+    "Node",
     "Express",
     "server",
-    "multi-site"
+    "multi-website"
   ],
   "author": "Luke Dupuis",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lukedupuis/sempervirens-server/issues"
   },
-  "homepage": "https://github.com/lukedupuis/sempervirens-server#readme"
+  "homepage": "https://github.com/lukedupuis/sempervirens-server#readme",
+  "dependencies": {
+    "@sempervirens/site-loader": "^0.5.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0"
+  },
+  "devDependencies": {
+    "@sempervirens/endpoint": "^0.8.0",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "superagent": "^8.0.0"
+  }
 }
