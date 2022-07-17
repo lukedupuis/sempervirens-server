@@ -15,10 +15,9 @@
     "url": "git+https://github.com/lukedupuis/sempervirens-server.git"
   },
   "keywords": [
-    "Node",
     "Express",
-    "server",
-    "multi-website"
+    "multi-website",
+    "server"
   ],
   "author": "Luke Dupuis",
   "license": "MIT",
