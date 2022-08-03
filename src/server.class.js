@@ -16,6 +16,8 @@ class Server {
   #enableRedirectToWww;
   #enableRedirectToHttps;
   #httpRedirectServerPort;
+  #viewEngine;
+  #viewDirs;
   #sitesDir;
   #sites;
   #middleware;
@@ -36,6 +38,8 @@ class Server {
     enableRedirectToWww = false,
     enableRedirectToHttps = false,
     httpRedirectServerPort = 80,
+    viewEngine = '',
+    viewDirs = '',
     sitesDir = 'sites',
     sites = [],
     middleware = []
@@ -48,6 +52,8 @@ class Server {
     this.#enableRedirectToWww = enableRedirectToWww;
     this.#enableRedirectToHttps = this.#hasSsl && enableRedirectToHttps;
     this.#httpRedirectServerPort = httpRedirectServerPort;
+    this.#viewEngine = viewEngine;
+    this.#viewDirs = viewDirs;
     this.#sitesDir = sitesDir;
     this.#sites = sites;
     this.#middleware = middleware;
@@ -68,6 +74,7 @@ class Server {
     this.#initRequestProperties();
     this.#initRedirectToHttps();
     this.#initRedirectToWww();
+    this.#initViewEngine();
     this.#initMiddleware();
   }
 
@@ -127,6 +134,12 @@ class Server {
     };
     this.app.use(redirect);
     this.#httpRedirectApp?.use(redirect);
+  }
+
+  #initViewEngine() {
+    if (!this.#viewEngine) return;
+    this.app.set('view engine', this.#viewEngine);
+    this.#viewDirs && this.app.set('views', this.#viewDirs);
   }
 
   #initMiddleware() {

@@ -95,6 +95,8 @@ node server
 | `sites` | object | Required. Each object is passed into the SiteLoader constructor. See `@sempervirens/site-loader` for more information. When the the server starts: - Sites become available for local development at `http://localhost/{domain}`. - If only one site is given, then the site becomes available at `http://localhost` as well. - Sites are also available at `http://{domain}`, primarily for making them available online. - (If an entry has been added to the local OS's `hosts` file, then the site will load locally at `http://{domain}`, too.) |
 | `sitesDir` | string | Optional. Default: `sites`. Sets the name of the {root}/{sites} directory where all of the website folders are located. |
 | `sslPaths` | object | Optional. Default: `{ key: '', cert: '', ca: [] }`. If "sslPaths" is given, then sites are loaded on `https` at `443` instead of `http` on port `80`. |
+| `viewDirs` | string[] | Optional. `viewEngine` is required. An array of directories where view files are located. It calls `app.set('views', viweDirs)`. |
+| `viewEngine` | string | Optional. An Express view engine. It calls `app.set('view engine', viewEngine)`. See [Using template engines with Express](https://expressjs.com/en/guide/using-template-engines.html). |
 
 ### start
 
