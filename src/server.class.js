@@ -170,16 +170,11 @@ class Server {
   }
 
   #loadSites() {
-    if (this.#sites.length == 1) {
-      this.app.use((req, res, next) => {
-        req.isSite = true;
-        next();
-      });
-    }
     this.#sites.forEach(site => {
       new SiteLoader({
         isProd: this.#isProd,
         sitesDir: this.#sitesDir,
+        isMultiSite: this.#sites.length > 1,
         ...site
       }).load(this.app);
     });
