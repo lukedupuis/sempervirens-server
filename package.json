@@ -33,7 +33,7 @@
     "helmet": "^5.1.0"
   },
   "devDependencies": {
-    "@sempervirens/endpoint": "^0.9.0",
+    "@sempervirens/endpoint": "^0.9.1",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "superagent": "^8.0.0"
