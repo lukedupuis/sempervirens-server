@@ -1,6 +1,6 @@
 {
   "name": "@sempervirens/server",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "An Express server system for serving one or more website(s) from one server",
   "main": "index.js",
   "type": "module",
